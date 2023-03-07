@@ -1,11 +1,14 @@
 import React, {Component} from 'react';
 
 import './Auth.css';
+import authContext from '../context/auth-context';
 
 class AuthPage extends Component {
-state = {
-   isLogin: true
-}
+    state = {
+        isLogin: true
+    };
+
+    static contextType = authContext;
 
     constructor(props) {
         super(props);
@@ -61,13 +64,19 @@ state = {
             }
         })
         .then(res => {
-            if (res.status !== 200 && res.status != 201) {
+            if (res.status !== 200 && res.status !== 201) {
                 throw new Error('Failed!');
             }
             return res.json();
         })
         .then(resData => {
-            console.log(resData);
+            if (resData.data.login.token) {
+                this.context.login(
+                    resData.data.login.token, 
+                    resData.data.login.userId,
+                    resData.data.login.tokenExpiration
+                );
+            }
         })
         .catch(err => {
             console.log(err);
