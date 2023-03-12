@@ -41,6 +41,9 @@ class App extends Component {
               {!this.state.token && (
                 <Route path="/" element={<Navigate replace to="/auth" />} />
               )}
+              {!this.state.token && (
+                <Route path="/bookings" element={<Navigate replace to="/auth" />} />
+              )}
               {this.state.token && (
                 <Route path="/" element={<Navigate replace to="/events" />} />
               )}
