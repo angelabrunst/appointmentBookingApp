@@ -11,7 +11,6 @@ const isAuth = require('./middleware/is-auth');
 const app = express();
 
 app.use(bodyParser.json());
-console.log("JSON object created");
 
 app.use((req, res, next) => {
     res.setHeader('Access-Control-Allow-Origin', '*');
