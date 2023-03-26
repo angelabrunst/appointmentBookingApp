@@ -260,21 +260,20 @@ class EventsPage extends Component {
             <h2>${this.state.selectedEvent.price} - {' '}{new Date(this.state.selectedEvent.date).toLocaleDateString('de-DE')}</h2>
             <p>{this.state.selectedEvent.description}</p>
           </Modal>)}
-        {this.context.token && (
-          <div className="events-control">
-            <p>Share your own Events!</p>
-            <button className="btn" onClick={this.startCreateEventHandler}>
-              Create Event
-            </button>
-          </div>
-        )}
+        
         {this.state.isLoading ? <Spinner /> 
         : <EventList 
           events={this.state.events} 
           authUserId={this.context.userId}
           onViewDetail={this.showDetailHandler}
         />}
-        
+        {this.context.token && (
+          <div className="events-control">
+            <button className="btn" onClick={this.startCreateEventHandler}>
+              Create Event
+            </button>
+          </div>
+        )}
       </React.Fragment>
     );
   }

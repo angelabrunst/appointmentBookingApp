@@ -1,22 +1,24 @@
 .events__list-item {
     margin: 1rem 0;
     padding: 1rem;
-    border: 2px solid rgb(0, 238, 255);
+    border: 2px solid var(--primary-color);
+    border-radius: 4px;
     display:flex;
     justify-content: space-between;
     align-items: center;
+    background-color: var(--translucent-white);
 }
 
 .events__list-item h1 {
     margin: 0;
     font-size: 1.5rem;
-    color:rgb(0, 238, 255);
+    color:var(--primary-color-change);
 }
 
 .events__list-item h2 {
     margin: 0;
     font-size: 1rem;
-    color:rgb(138, 139, 139);
+    color:var(--grey-color);
 }
 
 .events__list-item p {

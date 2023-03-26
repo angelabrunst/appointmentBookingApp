@@ -7,10 +7,12 @@
   }
   
   .bookings__item {
-    margin: 0.5rem 0;
-    padding: 0.5rem;
-    border: 1px solid #5101d1;
+    margin: 1rem 0;
+    padding: 1rem;
+    border: 2px solid var(--primary-color);
+    border-radius: 4px;
     display: flex;
     justify-content: space-between;
     align-items: center;
+    background-color: var(--translucent-white);
   }
