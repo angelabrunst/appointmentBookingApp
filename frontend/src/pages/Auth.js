@@ -5,7 +5,8 @@ import authContext from '../context/auth-context';
 
 class AuthPage extends Component {
     state = {
-        isLogin: true
+        isLogin: true,
+        isNewUser: false
     };
 
     static contextType = authContext;
@@ -78,6 +79,9 @@ class AuthPage extends Component {
             return res.json();
         })
         .then(resData => {
+          if (!this.state.isLogin && resData.data.createUser) {
+            this.setState({ isNewUser: true });
+          }
             if (resData.data.login.token) {
                 this.context.login(
                     resData.data.login.token,
@@ -92,23 +96,31 @@ class AuthPage extends Component {
     };
 
     render() {
-        return (
-            <form className='auth-form' onSubmit={this.submitHandler}>
-                <div className='form-control'>
-                    <label htmlFor='email'>E-Mail</label>
-                    <input type='email' id='email' ref={this.emailEl} />
-                </div>
-                <div className='form-control'>
-                    <label htmlFor='password'>Password</label>
-                    <input type='password' id='password' ref={this.passwordEl} />
-                </div>
-                <div className='form-actions'>
-                    <button type='submit'>Submit</button>
-                    <button type='button' onClick={this.switchModeHandler}>Switch to {this.state.isLogin ? 'Signup' : 'Login'}</button>
-                </div>
-            </form>
-        );
+      return (
+        <form className='auth-form' onSubmit={this.submitHandler}>
+          {/* Render the alert message if a new user is created */}
+          {this.state.isNewUser && (
+            <div className='form-control'>
+              <p>New user created!</p>
+            </div>
+          )}
+          <div className='form-control'>
+            <label htmlFor='email'>E-Mail</label>
+            <input type='email' id='email' ref={this.emailEl} />
+          </div>
+          <div className='form-control'>
+            <label htmlFor='password'>Password</label>
+            <input type='password' id='password' ref={this.passwordEl} />
+          </div>
+          <div className='form-actions'>
+            <button type='submit'>Submit</button>
+            <button type='button' onClick={this.switchModeHandler}>
+              Switch to {this.state.isLogin ? 'Signup' : 'Login'}
+            </button>
+          </div>
+        </form>
+      );
     }
-}
+  }
 
 export default AuthPage;
